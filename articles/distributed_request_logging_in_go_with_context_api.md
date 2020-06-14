@@ -74,7 +74,8 @@ We create another HTTP pipeline handler to plug a logger into our request contex
 
     func UseLogger(next http.HandlerFunc) http.HandlerFunc {
       fn := func(w http.ResponseWriter, r *http.Request) {
-          ctx := r.Context()      if reqId := GetReqIdCtx(ctx); reqId == nil {
+          ctx := r.Context()
+          if reqId := GetReqIdCtx(ctx); reqId == nil {
             // panics
             logrus.Fatal("No request id associated with request")
           } else {
@@ -109,7 +110,6 @@ The UseLogger handler has to come after the UseRequestId handler to capture the 
     http.HandleFunc("/users", UseRequestId(UseLogger(handler.GetUsers))
 
 ![](https://miro.medium.com/max/1400/1*rgKf-_W7zQx2DkwcAiAkJw.png)
-
 
 # Conclusion
 

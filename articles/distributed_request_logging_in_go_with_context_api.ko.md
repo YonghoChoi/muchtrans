@@ -18,7 +18,6 @@ source: https://medium.com/swlh/distributed-request-logging-in-go-with-context-a
     ...
     }
 
-
 ## HTTP 파이프라인
 
 컨텍스트에 request id를 입력하려면 모든 request 요청을 가로채는 HTTP 핸들러를 구현해야 한다. 아래 예제 코드에서 볼 수 있듯이 고 언어에서는 간단하게 구현할 수 있다. **UseRequestId** 핸들러는 ***ReqIdHeaderName***이라는 HTTP 헤더로부터 request id를 얻어내어 request 컨텍스트에 추가한다. request id가 존재하지 않는다면 새로운 request id를 생성한다. 이 과정은 유입되는 모든 request에서 발생한다.

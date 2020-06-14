@@ -23,7 +23,6 @@ func DoCall(ctx context.Context, url string) error {
 ## HTTP pipeline
 
 To put the request-id into the context, we build an HTTP handler to intercept every incoming request. This is straight forward in Golang, as shown below. The **UseRequestId** handler captures the request-id from a specific HTTP header ***ReqIdHeaderName*** and puts it into the request context. If there is no request-id, we generate a new request-id. This happens for every incoming request.
-
 ```
 func UseRequestId(next http.HandlerFunc) http.HandlerFunc {
    fn := func(w http.ResponseWriter, r *http.Request) {
@@ -43,7 +42,6 @@ func UseRequestId(next http.HandlerFunc) http.HandlerFunc {
 ```
 
 To get the request-id, we create two simple functions. Those functions are not required but make it a lot easier to access the current request-id.
-
 ```
 func GetReqIdReq(r *http.Request) string {
    return GetReqIdCtx(r.Context())
@@ -56,13 +54,11 @@ func GetReqIdCtx(ctx context.Context) string {
 ```
 
 To use the pipeline, we wrap our actual handler function with the pipeline.
-
 ```
 http.HandleFunc("/users", UseRequestId(handler.GetUsers))
 ```
 
 Now we can obtain the request-id and plug it into the header of any request our service makes.
-
 ```
 func DoCall(ctx context.Context, url string) error {
     ...
@@ -80,7 +76,6 @@ Every HTTP communication with other services will now include the request-id. In
 The last missing piece is the logger. For logging, we use logrus, but you can use any other logger. Logrus allows appending fields to your logs. Fields are key-value pairs that provide further information in your logs.
 
 We create another HTTP pipeline handler to plug a logger into our request context. The handler checks if there is a request-id inside the current context and plugs the request-id into a field of the logger. It then appends the logger to the request context.
-
 ```
 func UseLogger(next http.HandlerFunc) http.HandlerFunc {
    fn := func(w http.ResponseWriter, r *http.Request) {
@@ -100,7 +95,6 @@ func UseLogger(next http.HandlerFunc) http.HandlerFunc {
 ```
 
 We again create two functions to obtain the logger from the context quickly.
-
 ```
 func GetLogReq(r *http.Request) *logrus.Entry {
    return GetLogCtx(r.Context())
@@ -118,7 +112,6 @@ func GetLogCtx(ctx context.Context) *logrus.Entry {
 ```
 
 The UseLogger handler has to come after the UseRequestId handler to capture the request-id. Out new pipeline now looks like this.
-
 ```
 http.HandleFunc("/users", UseRequestId(UseLogger(handler.GetUsers))
 ```

@@ -1,6 +1,6 @@
 # muchtrans
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/ccfc9531-b5eb-41b6-8e00-7fe9c7fa14a1/deploy-status)](https://app.netlify.com/sites/muchtrans/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/75eb43d8-fd3b-4c0f-9237-dea8bec08456/deploy-status)](https://app.netlify.com/sites/yonghochoi/deploys)
 
 Muchtrans is yet another translation platform, under heavy developement.
 <br>Muchtrans는 한창 개발하고 있는 또 다른 번역 플랫폼입니다.

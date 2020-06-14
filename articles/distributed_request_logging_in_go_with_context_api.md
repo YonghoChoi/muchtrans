@@ -28,7 +28,8 @@ To put the request-id into the context, we build an HTTP handler to intercept ev
           if reqId = r.Header.Get(ReqIdHeaderName); reqId == "" {
             // first occurrence
             reqId = uuid.New().String()
-          }      // clone current context and append request-id
+          }
+          // clone current context and append request-id
           ctx := r.Context()
           ctx = context.WithValue(ctx, ReqIdKey, reqId)
 

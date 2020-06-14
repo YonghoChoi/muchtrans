@@ -21,16 +21,16 @@ source: https://medium.com/swlh/distributed-request-logging-in-go-with-context-a
 
 ## HTTP 파이프라인
 
-컨텍스트에 request id를 입력하려면 모든 request 요청을 가로채는 HTTP 핸들러를 구현해야 한다. 아래 예제 코드에서 볼 수 있듯이 고 언어에서는 간단하게 구현할 수 있다. UseRequestId 핸들러는 ReqIdHeaderName이라는 HTTP 헤더로부터 request id를 얻어내어 request 컨텍스트에 추가한다. request id가 존재하지 않는다면 새로운 request id를 생성한다. 이 과정은 유입되는 모든 request에서 발생한다.
+컨텍스트에 request id를 입력하려면 모든 request 요청을 가로채는 HTTP 핸들러를 구현해야 한다. 아래 예제 코드에서 볼 수 있듯이 고 언어에서는 간단하게 구현할 수 있다. **UseRequestId** 핸들러는 ***ReqIdHeaderName***이라는 HTTP 헤더로부터 request id를 얻어내어 request 컨텍스트에 추가한다. request id가 존재하지 않는다면 새로운 request id를 생성한다. 이 과정은 유입되는 모든 request에서 발생한다.
 
     func UseRequestId(next http.HandlerFunc) http.HandlerFunc {
         fn := func(w http.ResponseWriter, r *http.Request) {
           var reqId string
           if reqId = r.Header.Get(ReqIdHeaderName); reqId == "" {
-              // 첫 request 발생
+              // first occurrence
               reqId = uuid.New().String()
           }
-          // 현재의 컨텍스트를 복제하여 request id 추가
+          // clone current context and append request-id
           ctx := r.Context()
           ctx = context.WithValue(ctx, ReqIdKey, reqId)
 
@@ -119,15 +119,3 @@ UseLogger 핸들러는 request id를 획득하기 위한 UseRequestId 핸들러 
 우리는 오픈소스 온프레미스 도커 컨테이너 레지스트리인 harbour.rocks에서 이와 같은 로깅 전략을 사용하고, 중소기업을 위한 서버를 구축한다. harbour는 활발히 개발 중이지만 7월말까지 v1 준비를 계획하고 있다. 이 문서에서 설명한 마이크로서비스 아키텍처, 고언어, 컨테이너화에 관심이 있다면 Github <https://github.com/harbourrocks/harbour>에 star를 통해 우리를 지원할 수 있다. 또한 트위터를 팔로우하면 향후 업데이트 소식을 들을 수 있다.
 
 request 트레이싱을 위해 당신이 사용 중인 전략/라이브러리/프레임워크는 무엇이 있는가?
-
-
-## words
-
-* ubiquitous  : 아주 흔한
-* tend to : ~하는 경향이 있다.
-* nevertheless : 그럼에도 불구하고
-* numerous : 많은
-* incoherent : 일관성이 없는
-* systemwide : 전조직[계열, 체계]에 미치는
-* coherency : 일관성
-* further : 더, 더 멀리에, 더 나아가

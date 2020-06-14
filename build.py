@@ -78,7 +78,7 @@ def get_github_user(commit):
     headers = {
         'Authorization': 'token {}'.format(os.environ['GITHUB_ACCESS_TOKEN']),
     }
-    r = requests.get('https://api.github.com/repos/zerobased-co/muchtrans/commits/{}'.format(commit.hexsha), headers=headers).json()
+    r = requests.get('https://api.github.com/repos/YonghoChoi/muchtrans/commits/{}'.format(commit.hexsha), headers=headers).json()
 
     try:
         _github_users[email] = r['author']

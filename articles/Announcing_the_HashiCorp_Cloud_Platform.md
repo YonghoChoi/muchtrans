@@ -8,7 +8,7 @@ Today we are pleased to announce the HashiCorp Cloud Platform (HCP), a fully man
 
 Our first HCP service — **HCP Consul** — is now in private beta with support for AWS. **HCP Vault** with support for AWS will follow next. Use the link below to sign up for early access.
 
-![Sign Up for Early Access]](https://www.hashicorp.com/cloud-platform/request-access)
+[Sign Up for Early Access](https://www.hashicorp.com/cloud-platform/request-access)
 
 HashiCorp tools are used and operated by many community members and customers, but managing clusters and maintaining automated workflows can still be complicated and costly. This can increase onboarding times for smaller organizations and make multi-cloud objectives impractical for many enterprises. With automated deployments and fully managed clusters pre-configured for production, HCP enables a team to get critical workloads running in the cloud faster with fewer resources in order to meet today’s challenges.
 

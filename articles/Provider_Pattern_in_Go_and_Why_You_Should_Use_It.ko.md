@@ -36,27 +36,27 @@ Go에서의 추상화는 (다른 인터페이스와 마찬가지로) 공급자 �
 
 심지어 **우리**는 이 단계에서 데이터를 가져올 위치조차 알 필요가 없다. 예제를 통해 이 인터페이스를 위한 stub 구현체를 가질수 있고, 모두 정상 동작한다. 외부 서비스에 의존성이 없기 때문에 유즈케이스 자체를 테스트 할 수 있다.
 
-## Provider
+## 공급자
 
-The provider is acting as an *adapter* between the external service and our application. We can implement it only after we know the details of the external service. In our case, the details are `[OpenWeather](https://openweathermap.org/current)` API to fetch the actual weather. The provider will convert its response into the application `Weather` entity.
+공급자는 외부 서비스와 우리의 어플리케이션 사이에서 어댑터 역할을 한다. 우리는 외부 서비스에 대한 세부사항을 알아야 구현할 수 있다. 우리의 경우 세부사항은 실제 날씨를 가져오는 `[OpenWeather](https://openweathermap.org/current)` API 이다. 공급자는  API의 Response를 어플리케이션의 `Weather` 엔티티로 변환한다.
 
-The response struct is defined in our openweather package. Used to convert the language of the external service to our own application language.
+Response 구조체는 openweather 패키지에 정의되어있다. 외부 서비스의 언어를 우리의 어플리케이션에서 사용하는 언어로 변환하는데 사용된다. 
 
-We will use the response struct `weatherResponse` for decoding the response body. It is coupled to the OpenWeather API and contains JSON tags according to it. Unlike the application entity, which doesn’t hold any tags. It is essential to make this distinction for not mixing our entity with JSON tags. If the `OpenWeather` API changes, our entity won’t be. For example, if it will return “temperature” instead of “temp”, we won’t need to change our application’s code, only the provider’s code.
+우리는 response 바디를 디코딩하기 위해 Response 객체인 `weatherResponse`를 사용할 것이다. 이 객체는 어떠한 태그도 가지고 있지 않은 어플리케이션 엔티티와는 다르게 OpenWeather API와 연결되고, 이에 따라 JSON 태그가 포함된다. 엔티티를 JSON 태그와 혼합하지 않기 위해 이렇게 구분하는 것이 중요하다. `OpenWeather` API가 변경되더라도 우리의 엔티티는 변경되지 않는다. 예를들어, "temp" 대신에 "temperature"를 반환한다고 해도 우리는 어플리케이션 코드를 수정할 필요가 없고, 공급자의 코드만 수정하면 된다. 
 
-The provider itself calls the external API and converts the response into the entity:
+공급자 내에서 외부 API를 호출하고 엔티티에 response를 변환하여 전달한다. 
 
-Note that this package’s name is the same as the actual external service’s name -`openweather`. This is since it resides in the most outer layer as it is related to the *mechanism* and not the BL. By doing so, we are setting a clue for the reader that this package has nothing to do with the actual application BL or policy. It’s the implementation detail.
+이 패키지의 이름은 실제 외부 서비스의 이름인 `openweather`와 동일하다. 이는 BL이 아닌 메커니즘과 연관이 있고, 가장 바깥쪽 레이어에 있기 때문이다. 그렇게함으로써 이 패키지가 실제 애플리케이션 BL 또는 정책과 관련이 없다는 단서를 설정하고 있다. 이는 구현 세부사항이다. 
 
 ## Main
 
-Main is where we compose everything:
+Main은 우리가 모든 것을 구성하는 곳이다.
 
-main gets a flag representing a city, initializes the provider and the service, and triggers our forecasting service method.
+main은 도시를 대표하는 플래그를 가져오고, 공급자와 서비스를 초기화하며 예측 서비스 메소드를 트리거한다. 
 
-That is all there is. At first glance, it may look like it’s over-engineering for such a small application. But hopefully, after some time, the application will grow and change. You might want to have an entity outfit that holds the vital policy about 21°C. It doesn’t matter much for this example. Separating the code that knows about the outside world is crucial for enabling such changes in the future.
+이제 준비는 끝났다. 언뜻보기에 이런 작은 어플리케이션에 비해 오버엔지니어링처럼 보일 것이다. 하지만 이 후에 이 어플리케이션이 성장하고 변화하길 바란다. 21도에 대한 중요한 정책을 유지하는 엔티티를 갖길 원할 수 있다. 이 예제에서는 그 다지 중요하진 않다. 외부와 의존된 코드를 분리하는 것은 향후 이러한 변화를 가능하게 하는데 중요하다.
 
-This separation is the main core of the clean architecture approach, which we’ll take a closer look at in the next section.
+이러한 분리는 클린아키텍처 접근 방식의 따르기 위한 주요 핵심이며 다음 섹션에서 자세히 살펴볼 것이다. 
 
 # Clean Architecture
 

@@ -1,6 +1,6 @@
 title: Subject-Based Messaging
 author: NATS Official Reference
-source: https://docs.nats.io/nats-concepts/intro 
+source: https://docs.nats.io/nats-concepts/subjects  
 
 # Subject-Based Messaging
 

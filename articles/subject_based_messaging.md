@@ -1,4 +1,4 @@
-title: Subject-Based Messaging
+title: [NATS] Subject-Based Messaging
 author: NATS Official Reference
 source: https://docs.nats.io/nats-concepts/subjects  
 
@@ -30,13 +30,13 @@ NATS provides two _wildcards_ that can take the place of one or more elements in
 
 The first wildcard is `*` which will match a single token. For example, if an application wanted to listen for eastern time zones, they could subscribe to `time.*.east`, which would match `time.us.east` and `time.eu.east`.
 
-![](../.gitbook/assets/subjects2.svg)
+![](https://gblobscdn.gitbook.com/assets%2F-LqMYcZML1bsXrN3Ezg0%2F-LqMZac7AGFpQY7ewbGi%2F-LqMZftc5Yt_LEI224RE%2Fsubjects2.svg?alt=media)
 
 ### Matching Multiple Tokens
 
 The second wildcard is `>` which will match one or more tokens, and can only appear at the end of the subject. For example, `time.us.>` will match `time.us.east` and `time.us.east.atlanta`, while `time.us.*` would only match `time.us.east` since it can't match more than one token.
 
-![](../.gitbook/assets/subjects3.svg)
+![](https://gblobscdn.gitbook.com/assets%2F-LqMYcZML1bsXrN3Ezg0%2F-LqMZac7AGFpQY7ewbGi%2F-LqMZfteO4zWGmIbkFHf%2Fsubjects3.svg?alt=media)
 
 ### Monitoring and Wire Taps
 

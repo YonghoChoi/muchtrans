@@ -1,4 +1,4 @@
-title: NATS란?
+title: [NATS] NATS란?
 author: NATS 공식문서
 source: https://docs.nats.io/nats-concepts/intro 
 

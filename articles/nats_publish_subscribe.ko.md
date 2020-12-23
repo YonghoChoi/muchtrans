@@ -4,4 +4,4 @@ NATS는 일대다 통신을 위한 발행-구독 메시지 분산 모델을 구�
 
 ![](https://gblobscdn.gitbook.com/assets%2F-LqMYcZML1bsXrN3Ezg0%2F-LqMZac7AGFpQY7ewbGi%2F-LqMZgHxXJwFMQlDdoqN%2Fpubsub.svg?alt=media)
 
-[pub-sub tutorial](../developing-with-nats/tutorials/pubsub.md)을 따라 운영 서버에서 NATS 발행-구독을 직접 시도해보자. 
+[pub-sub tutorial](https://docs.nats.io/developing-with-nats/tutorials/pubsub)을 따라 운영 서버에서 NATS 발행-구독을 직접 시도해보자. 
